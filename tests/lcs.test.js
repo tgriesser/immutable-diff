@@ -1,8 +1,6 @@
-'use strict';
-
-var Immutable = require('immutable');
-var lcs = require('../src/lcs');
-var assert = require('assert');
+import {fromJS} from 'immutable'
+import * as lcs from '../lib/lcs'
+import assert from 'assert'
 
 describe('lcs', function() {
 
@@ -11,8 +9,8 @@ describe('lcs', function() {
     var str2 = 'testing123testing';
     var expectedStr = 'tsitest';
 
-    var list1 = Immutable.fromJS(str1.split(''));
-    var list2 = Immutable.fromJS(str2.split(''));
+    var list1 = fromJS(str1.split(''));
+    var list2 = fromJS(str2.split(''));
     var expected = expectedStr.split('');
 
     var result = lcs.lcs(list1, list2);
@@ -21,12 +19,12 @@ describe('lcs', function() {
   });
 
   it('computes for list of integers', function () {
-    var array1 = [1,2,3,4];
+    var array1 = [1, 2, 3, 4];
     var array2 = [1, 2, 2, 4, 5, 3, 3, 3, 2, 4];
-    var expected = [1,2,3,4];
+    var expected = [1, 2, 3, 4];
 
-    var list1 = Immutable.fromJS(array1);
-    var list2 = Immutable.fromJS(array2);
+    var list1 = fromJS(array1);
+    var list2 = fromJS(array2);
 
     var result = lcs.lcs(list1, list2);
 
@@ -37,8 +35,8 @@ describe('lcs', function() {
     var array1 = [1, 2, 3, 4];
     var array2 = [1, 2, 3, 5, 6, 7];
 
-    var list1 = Immutable.fromJS(array1);
-    var list2 = Immutable.fromJS(array2);
+    var list1 = fromJS(array1);
+    var list2 = fromJS(array2);
     var expected = [
       {op: '=', val: 1},
       {op: '=', val: 2},
@@ -50,7 +48,7 @@ describe('lcs', function() {
 
     var result = lcs.diff(list1, list2);
 
-    assert.ok(result.every(function(r, i){
+    assert.ok(result.every(function(r, i) {
       return r.op === expected[i].op && r.val === expected[i].val;
     }));
   });

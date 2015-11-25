@@ -1,9 +1,6 @@
-'use strict';
-
-var diff = require('../src/diff');
-var Immutable = require('immutable');
-var JSC = require('jscheck');
-var assert = require('assert');
+import diff from '../lib/diff'
+import {fromJS, is} from 'immutable'
+import JSC from 'jscheck'
 
 describe('Primitive types diff', function() {
   var failure = null;
@@ -19,7 +16,7 @@ describe('Primitive types diff', function() {
   });
 
   afterEach(function () {
-    if(failure){
+    if (failure) {
       console.error(failure);
       throw failure;
     }
@@ -28,11 +25,11 @@ describe('Primitive types diff', function() {
   it('check properties', function() {
     JSC.test(
       'returns [] when equal',
-      function(veredict, int1){
+      function(veredict, int1) {
         var result = diff(int1, int1);
-        var expected = Immutable.fromJS([]);
+        var expected = fromJS([]);
 
-        return veredict(Immutable.is(result, expected));
+        return veredict(is(result, expected));
       },
       [
         JSC.integer()
@@ -41,13 +38,13 @@ describe('Primitive types diff', function() {
 
     JSC.test(
       'replaces numbers',
-      function(veredict, int1, int2){
+      function(veredict, int1, int2) {
         var result = diff(int1, int2);
-        var expected = Immutable.fromJS([
-          {op: 'replace', path: '/', value: int2}
+        var expected = fromJS([
+          {op: 'replace', path: [], value: int2}
         ]);
 
-        return veredict(Immutable.is(result, expected));
+        return veredict(is(result, expected));
       },
       [
         JSC.integer(),
@@ -57,13 +54,13 @@ describe('Primitive types diff', function() {
 
     JSC.test(
       'replaces strings',
-      function(veredict, str1, str2){
+      function(veredict, str1, str2) {
         var result = diff(str1, str2);
-        var expected = Immutable.fromJS([
-          {op: 'replace', path: '/', value: str2}
+        var expected = fromJS([
+          {op: 'replace', path: [], value: str2}
         ]);
 
-        return veredict(Immutable.is(result, expected));
+        return veredict(is(result, expected));
       },
       [
         JSC.string(),
@@ -73,13 +70,13 @@ describe('Primitive types diff', function() {
 
     JSC.test(
       'replaces arrays',
-      function(veredict, array1, array2){
+      function(veredict, array1, array2) {
         var result = diff(array1, array2);
-        var expected = Immutable.fromJS([
-          {op: 'replace', path: '/', value: array2}
+        var expected = fromJS([
+          {op: 'replace', path: [], value: array2}
         ]);
 
-        return veredict(Immutable.is(result, expected));
+        return veredict(is(result, expected));
       },
       [
         JSC.array(5),
@@ -89,13 +86,13 @@ describe('Primitive types diff', function() {
 
     JSC.test(
       'replaces objects',
-      function(veredict, object1, object2){
+      function(veredict, object1, object2) {
         var result = diff(object1, object2);
-        var expected = Immutable.fromJS([
-          {op: 'replace', path: '/', value: object2}
+        var expected = fromJS([
+          {op: 'replace', path: [], value: object2}
         ]);
 
-        return veredict(Immutable.is(result, expected));
+        return veredict(is(result, expected));
       },
       [
         JSC.object(5),
