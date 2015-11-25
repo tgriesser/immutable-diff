@@ -1,7 +1,9 @@
+# Built files
+lib
+
 # Logs
 logs
 *.log
-lib
 
 # Runtime data
 pids

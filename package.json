@@ -1,12 +1,16 @@
 {
   "name": "immutable-diff",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hi-Fi diffing for Immutable.js data structures, forked from immutablediff",
   "main": "lib/diff.js",
   "jsnext:main": "src/diff.js",
-  "directories": {
-    "test": "tests"
-  },
+  "files": [
+    "lib",
+    "src",
+    "tests",
+    "npm-scripts",
+    "*.MD"
+  ],
   "scripts": {
     "lint": "eslint src tests",
     "build": "rimraf lib && babel ./src -d lib",
@@ -15,9 +19,8 @@
     "postinstall": "node ./npm-scripts/postinstall.js"
   },
   "keywords": [
-    "immutable.js",
-    "diff",
-    "jsondiff"
+    "immutable",
+    "diff"
   ],
   "author": [
     "Tim Griesser <tgriesser@gmail.com>",
